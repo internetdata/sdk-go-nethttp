@@ -2,6 +2,12 @@
 
 What each release changed for you, newest first. Each line is a commit's summary, linked to its full description and diff.
 
+## 1.0.5 - 2026-11-18
+
+### Fixes
+
+- Require internetdata v2.14.1: the spec as republished ([`864ede8`](https://github.com/internetdata/sdk-go-nethttp/commit/864ede80a19b304fbb4785bf7c0007cfef87bcc2))
+
 ## 1.0.4 - 2026-11-17
 
 ### Features
