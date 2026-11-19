@@ -2,6 +2,12 @@
 
 What each release changed for you, newest first. Each line is a commit's summary, linked to its full description and diff.
 
+## 1.0.6 - 2026-11-19
+
+### Fixes
+
+- Require internetdata v2.14.2: a reduced answer is cached a minute at most ([`206586c`](https://github.com/internetdata/sdk-go-nethttp/commit/206586c65819edd588760639369d8e87c0858945))
+
 ## 1.0.5 - 2026-11-18
 
 ### Fixes
