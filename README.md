@@ -17,7 +17,7 @@ go get github.com/internetdata/sdk-go-nethttp
 
 Requires Go 1.26 or newer.
 
-Without an API key a lookup is on Unlimited, the free plan: the country, the network and the company behind the address, Tor, relay, anycast, carrier and satellite space and the service flags, with no daily or monthly cap. Every lookup your app makes comes from your server's one address, though, so a busy site will see bursts refused. A paid plan answers every field, VPN, the proxy flags, hosting, CDN and the city among them; create a key in the [console](https://app.internetdata.io). A free account tries every field.
+Without an API key a lookup is on Unlimited, the free plan: the country, the network and the company behind the address, Tor, relay, anycast, carrier and satellite space, bots and the service flags, with no daily or monthly cap. Every lookup your app makes comes from your server's one address, though, so a busy site will see bursts refused. A paid plan answers every field, VPN, the proxy flags, hosting, CDN and the city among them; create a key in the [console](https://app.internetdata.io). A free account tries every field.
 
 ```go
 package main
@@ -69,7 +69,7 @@ Options: middleware.Options[*http.Request]{
 },
 ```
 
-A condition is written in the shape of a result, keyed by the same names the API uses, and only the members you name are considered, so it can refuse on anything in the answer. The country works on every plan, and so do the first two of these:
+A condition is written in the shape of a result, keyed by the same names the API uses, and only the members you name are considered, so it can refuse on anything in the answer. The country works on every plan, and so do the first three of these:
 
 ```go
 // the network's type
@@ -77,6 +77,9 @@ middleware.Conditions{{"asn": middleware.BlockCondition{"type": "hosting"}}}
 
 // anycast and satellite space: a list is OR
 middleware.Conditions{{"is_anycast": true}, {"is_satellite": true}}
+
+// crawlers, monitors and scanners
+middleware.Conditions{{"is_bot": true}}
 
 // traffic from servers, not people
 middleware.Conditions{{"is_hosting": true}, {"is_cdn": true}}
