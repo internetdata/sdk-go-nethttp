@@ -2,6 +2,12 @@
 
 What each release changed for you, newest first. Each line is a commit's summary, linked to its full description and diff.
 
+## 1.0.11 - 2026-11-23
+
+### Fixes
+
+- Require internetdata v2.16.1, which refuses an AS without its country or RPKI status ([`76e56d4`](https://github.com/internetdata/sdk-go-nethttp/commit/76e56d4e9a360e5c759e310305efc37313771d3c))
+
 ## 1.0.10 - 2026-11-22
 
 ### Features
