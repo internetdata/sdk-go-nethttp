@@ -94,7 +94,7 @@ middleware.Conditions{{"is_vpn": true, "vpn": middleware.BlockCondition{"provide
 middleware.Conditions{{"resproxy": middleware.BlockCondition{"hits": internetdatahttp.Gte(5)}}}
 ```
 
-Values are matched by equality, strings without regard to case. `AnyOf` means any-of. `Gte`, `Gt`, `Lte` and `Lt` compare numbers and chain into a range (`Gte(5).Lt(100)`); every bound you give must hold. Members set to `false` or `nil` are ignored, so a condition states the signals you act on; one that constrains nothing would match every request, and is refused when the middleware is built rather than silently blocking all your traffic.
+Values are matched by equality, strings without regard to case. `AnyOf` means any-of. `Gte`, `Gt`, `Lte` and `Lt` compare numbers and chain into a range (`Gte(5).Lt(100)`); every bound you give must hold. Against a member the answer holds as a list (`web`'s rows, `pubproxy.protocols`), a value matches when any one element does. Members set to `false` or `nil` are ignored, so a condition states the signals you act on; one that constrains nothing would match every request, and is refused when the middleware is built rather than silently blocking all your traffic.
 
 Replace the refusal with `OnBlocked`:
 
