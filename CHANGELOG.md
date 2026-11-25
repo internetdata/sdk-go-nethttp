@@ -2,6 +2,13 @@
 
 What each release changed for you, newest first. Each line is a commit's summary, linked to its full description and diff.
 
+## 1.1.0 - 2026-11-25
+
+### Features
+
+- Require internetdata v2.18.0: a visitor's user agent, and AllowBots in the core ([`277c896`](https://github.com/internetdata/sdk-go-nethttp/commit/277c896ba2acc881be60de4d3b955dbfa87e6be0))
+- AllowBots: send the visitor's user agent, and let a verified crawler through ([`4995c9d`](https://github.com/internetdata/sdk-go-nethttp/commit/4995c9dbcdc2061544bd54f8c3f67ccea9d66c71))
+
 ## 1.0.13 - 2026-11-24
 
 ### Features
