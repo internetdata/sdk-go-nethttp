@@ -24,6 +24,10 @@ import (
 // almost certainly wants an APIKey: without one a lookup is on Unlimited, the
 // free plan, and every lookup shares the rate limit of the server's one
 // address.
+//
+// AllowBots sends each request's own User-Agent header with its lookup and
+// lets a crawler whose answer verifies it through, whatever BlockCondition
+// matches; Unlimited never answers a verdict.
 type Options struct {
 	middleware.Options[*http.Request]
 
@@ -59,7 +63,7 @@ func New(options Options) (func(http.Handler) http.Handler, error) {
 
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			lookup, err := core.Evaluate(r.Context(), r)
+			lookup, err := core.EvaluateAgent(r.Context(), r, r.Header.Get("User-Agent"))
 			if err != nil {
 				onError(w, r, err)
 				return
