@@ -2,7 +2,7 @@ module github.com/internetdata/sdk-go-nethttp
 
 go 1.26.0
 
-require github.com/internetdata/sdk-go/v2 v2.18.1
+require github.com/internetdata/sdk-go/v2 v2.19.0
 
 require (
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect

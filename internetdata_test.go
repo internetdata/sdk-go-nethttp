@@ -549,8 +549,9 @@ func TestTheREADMEsAppLooksUpTheVisitorWithOnlyAnAPIKey(t *testing.T) {
 	}
 }
 
-// is_bot is on every plan, so the README's app blocks on it with any key: a
-// bot's address is refused before the handler, and another passes.
+// is_bot is a paid plan's, so the README's app blocks on it with a paid key: a
+// bot's address is refused before the handler, and another passes, as does any
+// address on Unlimited's answer, which carries no is_bot.
 func TestTheREADMEsAppBlocksOnIsBot(t *testing.T) {
 	for name, want := range map[string]int{"paid-bot": http.StatusForbidden, "unlimited-answer": http.StatusOK} {
 		t.Run(name, func(t *testing.T) {
