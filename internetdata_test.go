@@ -239,13 +239,20 @@ func TestBlocksOnACountryConditionAndPassesAnotherCountry(t *testing.T) {
 }
 
 func TestBlocksOnANetworkTypeAndOnAnonymityAndPassesACleanAnswer(t *testing.T) {
+	// The AS's type is a paid plan's: Unlimited's answer carries none, so the
+	// block needs the paid body, and on Unlimited the condition can never match.
+	byType := middleware.Conditions{{"asn": middleware.BlockCondition{"type": "hosting"}}}
 	hosting := serve(t, internetdatahttp.Options{Options: middleware.Options[*http.Request]{
-		Client:         newAPI(t, unlimitedAnswer(t)).client(t),
-		IPSelector:     fixedIP,
-		BlockCondition: middleware.Conditions{{"asn": middleware.BlockCondition{"type": "hosting"}}},
+		Client: newAPI(t, paidAnswer(t)).client(t), IPSelector: fixedIP, BlockCondition: byType,
 	}})
 	if status, _ := hosting(nil); status != http.StatusForbidden {
 		t.Errorf("status = %d, want 403 on the network's type", status)
+	}
+	unlimited := serve(t, internetdatahttp.Options{Options: middleware.Options[*http.Request]{
+		Client: newAPI(t, unlimitedAnswer(t)).client(t), IPSelector: fixedIP, BlockCondition: byType,
+	}})
+	if status, _ := unlimited(nil); status != http.StatusOK {
+		t.Errorf("status = %d, want 200: Unlimited carries no AS type, so the condition never matches", status)
 	}
 
 	anonymity := middleware.Conditions{{"is_tor": true}, {"is_vpn": true}}
